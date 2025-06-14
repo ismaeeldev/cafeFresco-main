@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo/logo2.png'
-import vector from '../assets/logo/vector2.png'
+import vector from '../assets/logo/Vector2.png'
 const Footer = () => {
     return (
         <div>
