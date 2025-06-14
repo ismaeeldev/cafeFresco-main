@@ -1,0 +1,98 @@
+[
+    {
+        "title": "Big and Juicy Wagyu Beef Cheeseburger",
+        "details": "Snacks",
+        "image": "./assets/products/MaskGroup1.png",
+        "price": 12.99
+    },
+    {
+        "title": "Fresh Lime Roasted Salmon with Ginger Sauce",
+        "details": "Fish",
+        "image": "./assets/products/Fish.png",
+        "price": 15.49
+    },
+    {
+        "title": "Strawberry Oatmeal Pancake with Honey Syrup",
+        "details": "Breakfast",
+        "image": "./assets/products/Breakfast.png",
+        "price": 8.99
+    },
+    {
+        "title": "Fresh and Healthy Mixed Mayonnaise Salad",
+        "details": "Healthy",
+        "image": "./assets/products/Healthy.png",
+        "price": 9.49
+    },
+    {
+        "title": "Chicken Meatballs with Cream Cheese",
+        "details": "Meat",
+        "image": "./assets/products/Meat.png",
+        "price": 11.29
+    },
+    {
+        "title": "Fruity Pancake with Orange & Blueberry",
+        "details": "Sweet",
+        "image": "./assets/products/Sweet.png",
+        "price": 7.99
+    },
+    {
+        "title": "The Best Easy One Pot Chicken and Rice",
+        "details": "Snack",
+        "image": "./assets/products/Snacks.png",
+        "price": 10.59
+    },
+    {
+        "title": "The Creamiest Creamy Chicken and Bacon Pasta",
+        "details": "Noodle",
+        "image": "./assets/products/Noodle.png",
+        "price": 13.99
+    },
+    {
+        "title": "Mixed Tropical Fruit Salad with Superfood Boosts",
+        "details": "Snacks",
+        "image": "./assets/products/MaskGroup1.png",
+        "price": 1.5
+    },
+    {
+        "title": "Big and Juicy Wagyu Beef Cheeseburger",
+        "details": "Fish",
+        "image": "./assets/products/MaskGroup2.png",
+        "price": 11.3
+    },
+    {
+        "title": "Healthy Japanese Fried Rice with Asparagus",
+        "details": "Breakfast",
+        "image": "./assets/products/MaskGroup3.png",
+        "price": 3
+    },
+    {
+        "title": "Cauliflower Walnut Vegetarian Taco Meat",
+        "details": "Healthy",
+        "image": "./assets/products/MaskGroup4.png",
+        "price": 6.5
+    },
+    {
+        "title": "Rainbow Chicken Salad with Mustard Dressing",
+        "details": "Meat",
+        "image": "./assets/products/MaskGroup5.png",
+        "price": 11.2
+    },
+    {
+        "title": "Barbeque Spicy Sandwiches with Chips",
+        "details": "Sweet",
+        "image": "./assets/products/MaskGroup6.png",
+        "price": 4.5
+    },
+    {
+        "title": "Firecracker Vegan Lettuce Wraps - Spicy!",
+        "details": "Snack",
+        "image": "./assets/products/MaskGroup7.png",
+        "price": 1.2
+    },
+    {
+        "title": "Chicken Ramen Soup with Mushroom",
+        "details": "Snack",
+        "image": "./assets/products/MaskGroup8.png",
+        "price": 2.2
+    }
+]
