@@ -23,6 +23,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const token = Cookies.get('userToken');
+        console.log(Cookies.get('userToken'));
         setUserToken(token || null);
     }, []);
 
@@ -113,7 +114,7 @@ const Navbar = () => {
                             <box-icon style={{ cursor: 'pointer' }} name="instagram-alt" type="logo"></box-icon>
 
                             {/* Desktop Cart */}
-                            <Link to="/cart" className="d-none d-lg-block" style={{marginTop:'7px', cursor: 'pointer', position: 'relative' }}>
+                            <Link to="/cart" className="d-none d-lg-block" style={{ marginTop: '7px', cursor: 'pointer', position: 'relative' }}>
                                 <box-icon name="cart"></box-icon>
                                 {cart.length !== 0 && (
                                     <span
