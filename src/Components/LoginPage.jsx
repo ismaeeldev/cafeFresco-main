@@ -30,7 +30,7 @@ const LoginSection = () => {
             });
 
             const data = await res.json();
-
+            console.log(data)
             // 🔒 Rate limit check
             if (!res.ok && data.message === "Too many requests, please try again later.") {
                 setLoginBlocked(true);
@@ -49,9 +49,9 @@ const LoginSection = () => {
 
             // ✅ Login successful
             if (res.ok) {
-                if (data.userToken) {
-                    document.cookie = `userToken=${data.token}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=None; Secure`;
-                }
+                // if (data.userToken) {
+                //     document.cookie = `userToken=${data.usertoken}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=None; Secure`;
+                // }
                 toast.success(data.message || "Login successful");
                 ringtone.play();
                 navigate('/');

@@ -46,9 +46,9 @@ const SignUp = () => {
             const data = await res.json();
 
             if (res.ok) {
-                if (data.userToken) {
-                    document.cookie = `userToken=${data.token}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=None; Secure`;
-                }
+                // if (data.userToken) {
+                //     document.cookie = `userToken=${data.userToken}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=None; Secure`;
+                // }
                 console.log("Signup successful:");
                 toast.success(data.message);
                 ringtone.play();

@@ -100,7 +100,6 @@ const PaymentForm = ({ totalPrice = 0, originalTotal = 0 }) => {
                 });
                 const data = await intentRes.json();
                 if (!data) return toast.error(data.message);
-                ringtone.play();
 
                 // Step 2: Confirm card payment
                 const result = await stripe.confirmCardPayment(data.clientSecret, {
