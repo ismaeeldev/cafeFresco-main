@@ -49,6 +49,9 @@ const LoginSection = () => {
 
             // ✅ Login successful
             if (res.ok) {
+                if (data.userToken) {
+                    document.cookie = `userToken=${data.token}; path=/; max-age=${15 * 24 * 60 * 60}; SameSite=None; Secure`;
+                }
                 toast.success(data.message || "Login successful");
                 ringtone.play();
                 navigate('/');
