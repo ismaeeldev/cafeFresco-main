@@ -109,7 +109,6 @@ const PaymentForm = ({ totalPrice = 0, originalTotal = 0 }) => {
                 });
 
                 if (result.error) return toast.error(result.error.message);
-                ringtone.play();
                 console.log('Card payment Succesfull')
 
                 if (result.paymentIntent.status === 'succeeded') {
