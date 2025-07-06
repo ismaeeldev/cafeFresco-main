@@ -20,8 +20,8 @@ const Footer = () => {
 
             <img className='vector' src={vector} />
 
-
-            <p style={{ fontSize: "20px", alignItems: "center", textAlign: "center" }}><strong>  © </strong>𝟮𝟬𝟮𝟱 𝕯𝖊𝖛𝖊𝖑𝖔𝖕𝖊𝖉 𝖇𝖞 <span style={{ color: "#ff0000", fontWeight: "700" }}>𝕸𝖗 𝖎𝖘𝖒𝖆𝖊𝖊𝖑</span></p>
+{/* 𝕸𝖗 𝖎𝖘𝖒𝖆𝖊𝖊𝖑  */}
+            <p style={{ fontSize: "20px", alignItems: "center", textAlign: "center" }}><strong>  © </strong>𝟮𝟬𝟮𝟱 𝕯𝖊𝖛𝖊𝖑𝖔𝖕𝖊𝖉 𝖇𝖞 <span style={{ color: "#ff0000", fontWeight: "700" }}>𝕸𝖗 𝖎𝖘𝖒𝖆𝖊𝖊𝖑 ,irfan,waleed</span></p>
 
 
         </div>

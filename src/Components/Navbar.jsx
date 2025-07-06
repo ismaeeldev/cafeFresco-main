@@ -159,22 +159,72 @@ const Navbar = () => {
                                             </>
                                         ) : (
                                             <>
-                                                {/* <Link to="/profile" className="btn r w-100 mb-2"
-                                                    style={{ backgroundColor: '#FFD700', color: '#000', fontWeight: 600 }}
-                                                >
-                                                    Profile
-                                                </Link> */}
-                                                <button
-                                                    className="btn btn-outline-danger w-100"
-                                                    onClick={() => {
-                                                        Cookies.remove('userToken');
-                                                        navigate('/login')
-                                                        setWishList(0);
+                                                <div className="d-flex flex-column gap-2 p-2" style={{ width: '170px' }}>
+                                                    <Link
+                                                        to="/track"
+                                                        className="btn btn-outline-warning py-1 px-3 shadow-sm"
+                                                        style={{
+                                                            fontWeight: 600,
+                                                            fontSize: '0.95rem',
+                                                            borderWidth: '1.5px',
+                                                            borderRadius: '6px',
+                                                            transition: 'all 0.2s ease',
+                                                            color: '#000',
+                                                            textAlign: 'center',
+                                                            ':hover': {
+                                                                backgroundColor: '#fff9e6',
+                                                                transform: 'translateY(-1px)'
+                                                            }
+                                                        }}
+                                                    >
+                                                        <i className="fas fa-truck-fast me-2" style={{ fontSize: '0.9rem' }}></i>
+                                                        Track Order
+                                                    </Link>
 
-                                                    }}
-                                                >
-                                                    Logout
-                                                </button>
+                                                    <Link
+                                                        to="/user/profile"
+                                                        className="btn btn-outline-primary py-1 px-3 shadow-sm"
+                                                        style={{
+                                                            fontWeight: 600,
+                                                            fontSize: '0.95rem',
+                                                            borderWidth: '1.5px',
+                                                            borderRadius: '6px',
+                                                            transition: 'all 0.2s ease',
+                                                            textAlign: 'center',
+                                                            ':hover': {
+                                                                backgroundColor: '#f0f7ff',
+                                                                transform: 'translateY(-1px)'
+                                                            }
+                                                        }}
+                                                    >
+                                                        <i className="fas fa-user-pen me-2" style={{ fontSize: '0.8rem' }}></i>
+                                                        User Profile
+                                                    </Link>
+
+                                                    <button
+                                                        className="btn btn-outline-danger py-1 px-3 shadow-sm"
+                                                        onClick={() => {
+                                                            Cookies.remove('userToken');
+                                                            navigate('/login');
+                                                            setWishList(0);
+                                                        }}
+                                                        style={{
+                                                            fontWeight: 600,
+                                                            fontSize: '0.95rem',
+                                                            borderWidth: '1.5px',
+                                                            borderRadius: '6px',
+                                                            transition: 'all 0.2s ease',
+                                                            textAlign: 'center',
+                                                            ':hover': {
+                                                                backgroundColor: '#ffebee',
+                                                                transform: 'translateY(-1px)'
+                                                            }
+                                                        }}
+                                                    >
+                                                        <i className="fas fa-right-from-bracket me-2" style={{ fontSize: '0.8rem' }}></i>
+                                                        Logout
+                                                    </button>
+                                                </div>
                                             </>
                                         )}
                                     </div>

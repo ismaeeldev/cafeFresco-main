@@ -18,9 +18,13 @@ const ProductDetail = () => {
         description: '',
         image: ''
     });
-
+    const [rating, setRating] = useState(0);
+    const [reviewText, setReviewText] = useState('');
     const [quantity, setQuantity] = useState(1); // Manage quantity state
     const [imageProduct, setImage] = useState(''); // Manage the displayed image
+    const [reviews, setReviews] = useState([
+
+    ]);
 
     const context = useContext(productContext);
     const { addToCart, getWishlist, ringtone } = context;
@@ -39,7 +43,7 @@ const ProductDetail = () => {
     useEffect(() => {
         if (location.state) {
             const { title, price, details, description, image, id } = location.state;
-            setProductData({ title, price, details, description, image, id });
+            setProductData({ id, title, price, details, description, image });
             setImage(image); // Initialize image state
         } else {
             navigate('/'); // Redirect if there's no product data
@@ -106,18 +110,81 @@ const ProductDetail = () => {
         }
     };
 
-    // const handlePayment = () => {
-    //     const product = {
-    //         title: decodedTitle,
-    //         price: productData.price,
-    //         details: productData.details,
-    //         image: imageProduct,
-    //         quantity: quantity
-    //     };
-    //     navigate(`/address/`);
-    //     addtoBuy(product)
 
-    // }
+    const addReview = async (productId, rating, reviewText) => {
+        try {
+
+            const response = await fetch(`${BASE_URL}/review/add/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include', // For cookies if needed
+                body: JSON.stringify({
+                    rating,
+                    review: reviewText
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Failed to add review');
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Error adding review:', error);
+            throw error;
+        }
+    };
+
+    const handleSubmitReview = async () => {
+        try {
+            const result = await addReview(productData.id, rating, reviewText);
+            // Handle success (update UI, etc.)
+            toast.success(result.message)
+            ringtone.play();
+            console.log('Review added:');
+            fetchReviews();
+        } catch (error) {
+            // Handle error
+            toast.error(error.message)
+            ringtone.play();
+        }
+    };
+
+    const getProductReviews = async (productId) => {
+        console.log(productData.id)
+        try {
+            const response = await fetch(`${BASE_URL}/review/all/${productId}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch reviews');
+            }
+
+            const data = await response.json();
+            console.log(data)
+            return data
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+            throw error;
+        }
+    };
+
+    const fetchReviews = async () => {
+        try {
+            const reviews = await getProductReviews(productData.id);
+            setReviews(reviews);
+        } catch (error) {
+            console.log(error.message)
+        }
+    };
+    // Fetch reviews on component mount
+    useEffect(() => {
+
+        fetchReviews();
+    }, [productData.id]);
 
 
     return (
@@ -219,6 +286,135 @@ const ProductDetail = () => {
                                 </div>
                             </div>
                         </main>
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-4 border-top">
+                <div className="container">
+                    <h4 className="mb-4">Customer Reviews</h4>
+
+                    {/* Review Form */}
+                    <div className="card mb-5">
+                        <div className="card-body">
+                            <h5 className="card-title">Write a Review</h5>
+                            <form>
+                                <div className="mb-3">
+                                    <label className="form-label">Rating</label>
+                                    <div className="star-rating">
+                                        {[1, 2, 3, 4, 5].map((star) => (
+                                            <i
+                                                key={star}
+                                                className={`fa${star <= rating ? 's' : 'r'} fa-star`}
+                                                style={{ color: '#ffc107', cursor: 'pointer', fontSize: '1.5rem' }}
+                                                onClick={() => setRating(star)}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="reviewText" className="form-label">Your Review</label>
+                                    <textarea
+                                        className="form-control"
+                                        id="reviewText"
+                                        rows="3"
+                                        value={reviewText}
+                                        onChange={(e) => setReviewText(e.target.value)}
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    style={{ padding: "8px", backgroundColor: 'red', border: 'none' }}
+
+                                    onClick={handleSubmitReview}
+                                >
+                                    Submit Review
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {/* Reviews Carousel */}
+                    <div className="mb-5">
+                        <h5 className="mb-4 text-center">Customer Feedback</h5>
+                        {reviews.length > 0 ? (
+                            <div className="position-relative">
+                                <div id="reviewCarousel" className="carousel slide" data-bs-ride="carousel">
+                                    <div className="carousel-inner">
+                                        {reviews.map((review, index) => (
+                                            <div
+                                                key={review._id}
+                                                className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                                            >
+                                                <div className="card border-0 mx-auto" style={{ maxWidth: '800px' }}>
+                                                    <div className="card-body text-center">
+                                                        <div className="d-flex flex-column align-items-center mb-3">
+                                                            <div className="mb-3">
+                                                                <div
+                                                                    className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                                                    style={{ width: '60px', height: '60px', fontSize: '1.5rem' }}
+                                                                >
+                                                                    {review.user?.name.charAt(0).toUpperCase()}
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 className="mb-1">{review.user?.email}</h6>
+                                                                <div className="text-warning mb-2">
+                                                                    {[...Array(5)].map((_, i) => (
+                                                                        <i
+                                                                            key={i}
+                                                                            className={`fa${i < review.rating ? 's' : 'r'} fa-star`}
+                                                                            style={{ fontSize: '1.2rem' }}
+                                                                        />
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p className="card-text px-4" style={{ fontSize: '1.1rem' }}>
+                                                            "{review.review}"
+                                                        </p>
+                                                        <small className="text-muted d-block mt-3">
+                                                            Reviewed on {new Date(review.createdAt).toLocaleDateString('en-US', {
+                                                                year: 'numeric',
+                                                                month: 'long',
+                                                                day: 'numeric'
+                                                            }) || 'N/A'}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Custom Carousel Controls */}
+                                <button
+                                    className="carousel-control-prev position-absolute start-0 top-50 translate-middle-y"
+                                    type="button"
+                                    data-bs-target="#reviewCarousel"
+                                    data-bs-slide="prev"
+                                    style={{ width: '40px', height: '40px', left: '-20px' }}
+                                >
+                                    <span className="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Previous</span>
+                                </button>
+                                <button
+                                    className="carousel-control-next position-absolute end-0 top-50 translate-middle-y"
+                                    type="button"
+                                    data-bs-target="#reviewCarousel"
+                                    data-bs-slide="next"
+                                    style={{ width: '40px', height: '40px', right: '-20px' }}
+                                >
+                                    <span className="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="alert alert-info text-center mx-auto" style={{ maxWidth: '800px' }}>
+                                No reviews yet. Be the first to review!
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

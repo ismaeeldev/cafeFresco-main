@@ -62,6 +62,28 @@ const PaymentForm = ({ totalPrice = 0, originalTotal = 0 }) => {
         return data;
     };
 
+    const sendOrderEmail = async (orderId, amount, status) => {
+        try {
+            const response = await fetch(`${BASE_URL}/order/send-order-email`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ orderId, amount, status })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                console.error("Failed to send order email:", data.message);
+            } else {
+                console.log("Order confirmation email sent successfully");
+            }
+        } catch (error) {
+            console.error("Error sending order email:", error.message);
+        }
+    };
+
+
     const handleSubmit = async () => {
         const amount = totalPrice || originalTotal;
         const products = isBuyEmpty
@@ -82,6 +104,7 @@ const PaymentForm = ({ totalPrice = 0, originalTotal = 0 }) => {
                 await setTransactionId(order._id, payment.payment._id);
                 toast.success('Order placed successfully with Cash on Delivery!');
                 ringtone.play();
+                sendOrderEmail(order._id, amount, 'unpaid');
                 setDiscountApplied(false);
                 setOriginalTotal(0);
                 setTotalPrice(0);
@@ -126,6 +149,7 @@ const PaymentForm = ({ totalPrice = 0, originalTotal = 0 }) => {
                     await setTransactionId(order._id, payment.payment._id);
                     toast.success('Payment successful and order placed!');
                     ringtone.play();
+                    sendOrderEmail(order._id, amount, 'paid');
                     setDiscountApplied(false);
                     setOriginalTotal(0);
                     setTotalPrice(0);

@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import './CSS/login.css';
 import forget from '../assets/forget.svg'
 import { useEffect, useContext } from "react";
@@ -121,7 +121,7 @@ const Forgot = () => {
                     </div>
                 </div>
             </div >
-           
+
         </section >
     );
 };
